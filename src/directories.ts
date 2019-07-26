@@ -22,7 +22,8 @@ export default class DirList extends BasicList {
 
 		this.addAction("add", async item => {
 			let filename = await workspace.requestInput(`File name (${item.label}/)`);
-			let filepath = path.join(workspace.rootPath, filename);
+			let relpath = path.join(item.label, filename);
+			let filepath = path.join(workspace.rootPath, relpath);
 			let dir = path.dirname(filepath);
       let dirstat = await stat(dir);
       if (!dirstat || !dirstat.isDirectory()) {
@@ -34,7 +35,7 @@ export default class DirList extends BasicList {
 				});
       }
 			let uri = Uri.file(filepath).toString();
-			await workspace.createFile(filename, {overwrite: false, ignoreIfExists: true});
+			await workspace.createFile(relpath, {overwrite: false, ignoreIfExists: true});
 			await workspace.jumpTo(uri);
 		}, {reload: false, persist: false});
 
