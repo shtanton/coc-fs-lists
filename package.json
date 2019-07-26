@@ -1,6 +1,6 @@
 {
  "name": "coc-fs-lists",
- "version": "0.1.0",
+ "version": "0.1.0-1",
  "description": "Manage dirs from CocList",
  "main": "lib/index.js",
  "keywords": [
