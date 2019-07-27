@@ -7,7 +7,7 @@ File system lists sources for [coc.nvim](https://github.com/neoclide/coc.nvim/)
 Features:
 - [ ] `directories`
 	- [x] `add` create file in directory
-	- [ ] `rename`
+	- [x] `rename`
 	- [ ] `delete`
 	- [ ] `fs` view files in directory and subdirectories
 - [ ] `fs` files is taken by coc-lists

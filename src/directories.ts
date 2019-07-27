@@ -41,8 +41,7 @@ export default class DirList extends BasicList {
 
 		this.addAction("rename", async item => {
 			let oldpath = path.join(workspace.rootPath, item.label);
-			let newname = await workspace.requestInput("New name", oldpath);
-			let newpath = path.join(workspace.rootPath, newname);
+			let newpath = await workspace.requestInput("New name", oldpath);
 			await new Promise((resolve, reject) => {
 				fs.rename(oldpath, newpath, err => {
 					if (err) return reject(err);
@@ -66,7 +65,6 @@ export default class DirList extends BasicList {
 		const cwd = await workspace.rootPath;
 		return new Promise((resolve, reject) => {
 			let {cmd, args} = this.getCommand();
-			//let process = spawn("fd", ["-H", "-t", "d"], {cwd});
 			let process = spawn(cmd, args, {cwd});
 			let rl = createInterface(process.stdout);
 			let lines = [{label: ""}];
