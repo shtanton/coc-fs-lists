@@ -4,6 +4,7 @@ import {createInterface} from "readline";
 import * as path from "path";
 import * as fs from "fs";
 import mkdirp from "mkdirp";
+import rimraf from "rimraf";
 
 function stat(path: string): Promise<fs.Stats> {
 	return new Promise((resolve, _reject) => fs.stat(path, (err, stats) => {
@@ -48,6 +49,29 @@ export default class DirList extends BasicList {
 					resolve();
 				});
 			});
+		}, {reload: true, persist: true});
+
+		this.addAction("delete", async item => {
+			let dirpath = path.join(workspace.rootPath, item.label);
+			let isEmpty = await new Promise((resolve, reject) => {
+				fs.readdir(dirpath, (err, files) => {
+					if (err) return reject(err);
+					resolve(!files.length);
+				});
+			});
+			if (!isEmpty) {
+				let shouldContinue = await workspace.callAsync<string>("input", [`Directory ${item.label} isn't empty, delete anyway? [y/N]:`]);
+				if (shouldContinue !== "y" && shouldContinue !== "Y") {
+					return;
+				}
+			}
+			await new Promise((resolve, reject) => {
+				rimraf(dirpath, err => {
+					if (err) return reject(err);
+					resolve();
+				});
+			});
+			await workspace.showMessage("Deleted");
 		}, {reload: true, persist: true});
 	}
 

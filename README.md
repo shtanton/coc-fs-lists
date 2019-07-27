@@ -8,7 +8,7 @@ Features:
 - [ ] `directories`
 	- [x] `add` create file in directory
 	- [x] `rename`
-	- [ ] `delete`
+	- [x] `delete`
 	- [ ] `fs` view files in directory and subdirectories
 - [ ] `fs` files is taken by coc-lists
 	- [ ] `open`
