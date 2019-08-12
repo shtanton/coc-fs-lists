@@ -9,8 +9,9 @@ Features:
 	- [x] `add` create file in directory
 	- [x] `rename`
 	- [x] `delete`
+	- [x] `subdirs` view subdirectories in CocList
 	- [ ] `fs` view files in directory and subdirectories
-- [ ] `fs` files is taken by coc-lists
+- [ ] `fs` (because files is taken by coc-lists)
 	- [ ] `open`
 	- [ ] `preview`
 	- [ ] `quickfix`
