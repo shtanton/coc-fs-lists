@@ -17,6 +17,13 @@ export default class DirList extends BasicList {
 	public defaultAction = "add"
 	public description = "list of workspace directories"
 	public name = "directories"
+	public options = [
+		{
+			name: "-D, -directory DIRECTORY",
+			description: "Only search subdirectories of a directory",
+			hasValue: true,
+		},
+	]
 
 	constructor(nvim: Neovim) {
 		super(nvim);
@@ -85,8 +92,14 @@ export default class DirList extends BasicList {
 		return {cmd, args};
 	}
 
-	public async loadItems(_context: ListContext): Promise<ListItem[]> {
-		const cwd = await workspace.rootPath;
+	public async loadItems(context: ListContext): Promise<ListItem[]> {
+		const options = this.parseArguments(context.args);
+		let cwd: string;
+		if (typeof options.directory === "string") {
+			cwd = options.directory;
+		} else {
+			cwd = await workspace.rootPath;
+		}
 		return new Promise((resolve, reject) => {
 			let {cmd, args} = this.getCommand();
 			let process = spawn(cmd, args, {cwd});
