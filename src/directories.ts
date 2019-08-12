@@ -50,12 +50,7 @@ export default class DirList extends BasicList {
 		this.addAction("rename", async item => {
 			let oldpath = path.join(workspace.rootPath, item.label);
 			let newpath = await workspace.requestInput("New name", oldpath);
-			await new Promise((resolve, reject) => {
-				fs.rename(oldpath, newpath, err => {
-					if (err) return reject(err);
-					resolve();
-				});
-			});
+			await workspace.renameFile(oldpath, newpath);
 		}, {reload: true, persist: true});
 
 		this.addAction("delete", async item => {
@@ -84,6 +79,11 @@ export default class DirList extends BasicList {
 		this.addAction("subdirs", async item => {
 			let dir = path.join(workspace.rootPath, item.label);
 			listManager.start(["directories", "-D", dir]);
+		}, {reload: false, persist: false});
+
+		this.addAction("fs", async item => {
+			let dir = path.join(workspace.rootPath, item.label);
+			listManager.start(["fs", "-D", dir]);
 		}, {reload: false, persist: false});
 	}
 

@@ -5,12 +5,12 @@ This is in very early development and isn't usable yet!
 File system lists sources for [coc.nvim](https://github.com/neoclide/coc.nvim/)
 
 Features:
-- [ ] `directories` View project directories
+- [x] `directories` View project directories
 	- [x] `add` create file in directory
 	- [x] `rename`
 	- [x] `delete`
 	- [x] `subdirs` view subdirectories in CocList
-	- [ ] `fs` view files in directory and subdirectories
+	- [x] `fs` view files in directory and subdirectories
 - [x] `fs` View project files (because files is taken by coc-lists)
 	- [x] `open`
 	- [x] `preview`
@@ -19,8 +19,8 @@ Features:
 	- [x] `drop`
 	- [x] `vsplit`
 	- [x] `split`
-	- [ ] `rename`
-	- [ ] `delete`
+	- [x] `rename`
+	- [x] `delete`
 
 ## Install
 

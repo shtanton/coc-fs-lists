@@ -59,6 +59,22 @@ export default class FsList extends BasicList {
 	constructor(nvim: Neovim) {
 		super(nvim);
 		this.addLocationActions();
+
+		this.addAction("rename", async item => {
+			let oldpath = path.join(workspace.rootPath, item.label);
+			let newpath = await workspace.requestInput("New name", oldpath);
+			await workspace.renameFile(oldpath, newpath);
+		}, {reload: true, persist: true});
+
+		this.addAction("delete", async item => {
+			let file = path.join(workspace.rootPath, item.label);
+			let shouldContinue = await workspace.callAsync<string>("input", [`Are you sure you want to delete ${file}? [y/N]:`]);
+			if (shouldContinue !== "y" && shouldContinue !== "Y") {
+				return;
+			}
+			await workspace.deleteFile(file);
+			await workspace.showMessage("Deleted");
+		}, {reload: true, persist: true});
 	}
 
 	private getCommand(): {cmd: string, args: string[]} {
