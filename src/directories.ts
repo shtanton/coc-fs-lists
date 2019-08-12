@@ -1,4 +1,4 @@
-import {BasicList, ListContext, ListItem, Neovim, workspace, Uri} from "coc.nvim";
+import {BasicList, ListContext, ListItem, Neovim, workspace, Uri, listManager} from "coc.nvim";
 import {spawn} from "child_process";
 import {createInterface} from "readline";
 import * as path from "path";
@@ -80,6 +80,11 @@ export default class DirList extends BasicList {
 			});
 			await workspace.showMessage("Deleted");
 		}, {reload: true, persist: true});
+
+		this.addAction("subdirs", async item => {
+			let dir = path.join(workspace.rootPath, item.label);
+			listManager.start(["directories", "-D", dir]);
+		}, {reload: false, persist: false});
 	}
 
 	private getCommand(): {cmd: string, args: string[]} {
