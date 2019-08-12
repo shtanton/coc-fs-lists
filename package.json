@@ -1,57 +1,70 @@
 {
- "name": "coc-fs-lists",
- "version": "0.1.2-0",
- "description": "Manage dirs from CocList",
- "main": "lib/index.js",
- "keywords": [
-  "coc.nvim",
-  "list",
-  "fs"
- ],
- "engines": {
-  "coc": "^0.0.72"
- },
- "scripts": {
-  "build": "webpack",
-  "prepare": "webpack"
- },
- "author": "Charlie Stanton",
- "license": "MIT",
- "contributes": {
-  "configuration": {
-   "type": "object",
-   "properties": {
-    "list.source.directories.command": {
-     "type": "string",
-     "default": "find",
-     "description": "Command used for searching directories"
-    },
-    "list.source.directories.args": {
-     "type": "array",
-     "default": [
-      ".",
-      "-type",
-      "d"
-     ],
-     "description": "Arguments passed to directory command",
-     "items": {
-      "type": "string"
-     }
-    }
-   }
-  }
- },
- "devDependencies": {
-  "@types/mkdirp": "^0.5.2",
-  "@types/node": "^12.6.8",
-  "@types/rimraf": "^2.0.2",
-  "coc.nvim": "0.0.73",
-  "mkdirp": "^0.5.1",
-  "rimraf": "^2.6.3",
-  "ts-loader": "^6.0.4",
-  "typescript": "^3.5.3",
-  "vscode-languageserver-protocol": "^3.14.1",
-  "webpack": "^4.37.0",
-  "webpack-cli": "^3.3.6"
- }
+	"name": "coc-fs-lists",
+	"version": "0.2.0-0",
+	"description": "Manage dirs from CocList",
+	"main": "lib/index.js",
+	"keywords": [
+		"coc.nvim",
+		"list",
+		"fs"
+	],
+	"engines": {
+		"coc": "^0.0.72"
+	},
+	"scripts": {
+		"build": "webpack",
+		"prepare": "webpack"
+	},
+	"author": "Charlie Stanton",
+	"license": "MIT",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"properties": {
+				"list.source.directories.command": {
+					"type": "string",
+					"default": "find",
+					"description": "Command used for searching directories"
+				},
+				"list.source.directories.args": {
+					"type": "array",
+					"default": [
+						".",
+						"-type",
+						"d"
+					],
+					"description": "Arguments passed to directory command",
+					"items": {
+						"type": "string"
+					}
+				},
+				"list.source.fs.command": {
+					"type": "string",
+					"default": "find",
+					"description": "Command used for listing files"
+				},
+				"list.source.fs.args": {
+					"type": "array",
+					"default": [".", "-type", "f"],
+					"description": "Arguments passed to file command",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"devDependencies": {
+			"@types/mkdirp": "^0.5.2",
+			"@types/node": "^12.6.8",
+			"@types/rimraf": "^2.0.2",
+			"coc.nvim": "0.0.73",
+			"mkdirp": "^0.5.1",
+			"rimraf": "^2.6.3",
+			"ts-loader": "^6.0.4",
+			"typescript": "^3.5.3",
+			"vscode-languageserver-protocol": "^3.14.1",
+			"webpack": "^4.37.0",
+			"webpack-cli": "^3.3.6"
+		}
+	}
 }
